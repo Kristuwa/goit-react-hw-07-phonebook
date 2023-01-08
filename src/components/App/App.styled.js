@@ -10,12 +10,14 @@ export const Container = styled.div`
 `;
 
 export const TitleForm = styled.h1`
+  text-align: center;
   font-size: 34px;
   color: #4f4d4d;
   margin-bottom: 20px;
 `;
 
 export const TitleContacts = styled.h2`
+  text-align: center;
   font-size: 34px;
   color: #4f4d4d;
   margin-bottom: 25px;

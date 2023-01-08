@@ -5,6 +5,8 @@ export const FormContainer = styled.form`
   width: 300px;
   padding: 20px;
   margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
   border: 2px solid #3e4d44;
   border-radius: 10px;
 `;

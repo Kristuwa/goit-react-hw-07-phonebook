@@ -1,11 +1,11 @@
-
 import styled from '@emotion/styled';
 
 export const FormContainer = styled.form`
+  background-color: #f2f3e4;
   width: 300px;
   padding: 20px;
   margin-bottom: 20px;
-  border: 2px solid #000000;
+  border: 2px solid #3e4d44;
   border-radius: 10px;
 `;
 

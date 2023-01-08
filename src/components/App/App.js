@@ -1,25 +1,62 @@
 import ContactForm from '../ContactForm';
 import ContactList from '../ContactList';
-import { Container, TitleForm, TitleContacts } from './App.styled';
-import { useSelector } from 'react-redux';
-import { getFilterList } from 'redux/selectors';
+import { Toaster } from 'react-hot-toast';
+import {
+  Container,
+  TitleForm,
+  TitleContacts,
+  ContentBlock,
+} from './App.styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFilterList } from 'redux/selectors';
 import Filter from 'components/Filter';
-import { getContacts } from 'redux/contacts/selectors';
+import {
+  selectError,
+  selectIsLoading,
+  selectContacts,
+} from 'redux/contacts/selectors';
+import { useEffect } from 'react';
+import { fetchContacts } from 'redux/operations';
+import { Notification } from 'components/Notification/Notification';
+import { Loader } from 'components/Loader/Loader';
 
 export const App = () => {
-  const contacts = useSelector(getContacts);
-  const filterList = useSelector(getFilterList);
+  const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
+  const filterList = useSelector(selectFilterList);
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
   return (
     <Container>
-      <TitleForm>Phonebook</TitleForm>
-      <ContactForm />
-      <TitleContacts>Contacts</TitleContacts>
-      {contacts.length === 0 && (
-        <p>You have no contacts, add your first contact</p>
-      )}
-      {contacts.length > 0 && <Filter />}
-      {filterList.length > 0 && <ContactList />}
+      <ContentBlock>
+        <TitleForm>Phonebook</TitleForm>
+        <ContactForm />
+      </ContentBlock>
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+        }}
+      />
+      <ContentBlock>
+        <TitleContacts>Contacts</TitleContacts>
+
+        {error && <Notification message="Contacts no found" />}
+        {!isLoading && !error && contacts.length === 0 && (
+          <p>You have no contacts, add your first contact</p>
+        )}
+        {contacts.length > 0 && <Filter />}
+        {isLoading && !error && <Loader />}
+        {filterList.length > 0 && <ContactList />}
+      </ContentBlock>
     </Container>
   );
 };

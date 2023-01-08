@@ -1,11 +1,12 @@
 import { FormContainer, Input, Button, Label } from './ContactForm.styled';
-import { addContact } from 'redux/contacts/contactsSlice';
+import { addContact } from 'redux/operations';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
-import { getContacts } from 'redux/contacts/selectors';
+import { selectContacts } from 'redux/contacts/selectors';
+import toast from 'react-hot-toast';
 
 const ContactForm = () => {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -20,12 +21,18 @@ const ContactForm = () => {
     const contact = { name, number };
     for (let item of contacts) {
       if (contact.name.toLowerCase() === item.name.toLowerCase()) {
-        alert(`${contact.name} is already in contacts`);
+        toast.error(`${contact.name} is already in contacts`);
         resetForm();
         return;
       }
     }
-    dispatch(addContact(contact));
+    dispatch(addContact(contact))
+      .then(response =>
+        toast.success(
+          `${response.payload.name} was added to your List of Contacts`
+        )
+      )
+      .catch(() => toast.error(`Something wrong`));
     resetForm();
   };
 

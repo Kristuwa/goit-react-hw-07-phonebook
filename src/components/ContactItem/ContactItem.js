@@ -9,11 +9,11 @@ import { FaPhone } from 'react-icons/fa';
 import { MdDelete, MdAutoDelete } from 'react-icons/md';
 
 const ContactItem = ({ id, name, number }) => {
-  const [deleteId, setDeleteId] = useState('');
+  const [deletingId, setDeletingId] = useState('');
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const handleDelete = () => {
-    setDeleteId(id);
+    setDeletingId(id);
     dispatch(deleteContact(id))
       .then(response => {
         toast.error(
@@ -22,7 +22,7 @@ const ContactItem = ({ id, name, number }) => {
       })
       .catch(() => toast.error(`Something wrong`));
   };
-  const isDeleting = isLoading && deleteId === id;
+  const isDeleting = isLoading && id === deletingId;
 
   return (
     <Item>

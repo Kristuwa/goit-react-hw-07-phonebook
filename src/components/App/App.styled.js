@@ -60,3 +60,10 @@ export const ScrollBar = styled.div`
     background: #555;
   }
 `;
+
+export const Message = styled.p`
+  margin-left: 15px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.52;
+`;

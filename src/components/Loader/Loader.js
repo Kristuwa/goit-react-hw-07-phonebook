@@ -6,11 +6,11 @@ export const Loader = () => {
       height="80"
       width="80"
       radius="9"
-      color="#4fa94d"
+      color="#3e4d44"
       ariaLabel="three-dots-loading"
       wrapperStyle={{
-        marginTop: 20,
-        marginLeft: 50,
+        marginTop: 40,
+        marginLeft: 150,
       }}
       wrapperClassName=""
       visible={true}

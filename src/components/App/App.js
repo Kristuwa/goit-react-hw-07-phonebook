@@ -7,6 +7,7 @@ import {
   TitleContacts,
   ContentBlock,
   ScrollBar,
+  Message,
 } from './App.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilterList } from 'redux/selectors';
@@ -20,6 +21,7 @@ import { useEffect } from 'react';
 import { fetchContacts } from 'redux/operations';
 import { Notification } from 'components/Notification/Notification';
 import { Loader } from 'components/Loader/Loader';
+import { RiContactsFill } from 'react-icons/ri';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -52,11 +54,17 @@ export const App = () => {
 
         {error && <Notification message="Contacts no found" />}
         {!isLoading && !error && contacts.length === 0 && (
-          <p>You have no contacts, add your first contact</p>
+          <Message>
+            You have no contacts, add your first contact <RiContactsFill />
+          </Message>
         )}
         {contacts.length > 0 && <Filter />}
         {isLoading && !error && <Loader />}
-        <ScrollBar> {filterList.length > 0 && <ContactList />}</ScrollBar>
+        {filterList.length > 0 && (
+          <ScrollBar>
+            <ContactList />
+          </ScrollBar>
+        )}
       </ContentBlock>
     </Container>
   );

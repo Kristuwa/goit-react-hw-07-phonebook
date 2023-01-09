@@ -39,3 +39,24 @@ export const ContentBlock = styled.div`
   padding: 20px;
   box-shadow: 8px 8px 8px 0px rgba(255, 255, 255, 0.5);
 `;
+
+export const ScrollBar = styled.div`
+  height: 420px;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+`;

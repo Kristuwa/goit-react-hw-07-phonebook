@@ -6,6 +6,7 @@ import {
   TitleForm,
   TitleContacts,
   ContentBlock,
+  ScrollBar,
 } from './App.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilterList } from 'redux/selectors';
@@ -55,7 +56,7 @@ export const App = () => {
         )}
         {contacts.length > 0 && <Filter />}
         {isLoading && !error && <Loader />}
-        {filterList.length > 0 && <ContactList />}
+        <ScrollBar> {filterList.length > 0 && <ContactList />}</ScrollBar>
       </ContentBlock>
     </Container>
   );

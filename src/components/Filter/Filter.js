@@ -1,4 +1,4 @@
-import { Input, Label } from './Filter.styled';
+import { Container, Input, Label } from './Filter.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from 'redux/filter/filtersSlice';
 import { selectFilter } from 'redux/filter/selectors';
@@ -11,16 +11,18 @@ const Filter = () => {
   const handleOnChange = e => dispatch(setFilter(e.target.value));
 
   return (
-    <Label htmlFor="filter">
-      Find contacts by name:
-      <Input
-        name="filter"
-        type="text"
-        value={filter}
-        onChange={handleOnChange}
-        disabled={contacts.length < 2 && !filter}
-      />
-    </Label>
+    <Container>
+      <Label htmlFor="filter">
+        Find contacts by name:
+        <Input
+          name="filter"
+          type="text"
+          value={filter}
+          onChange={handleOnChange}
+          disabled={contacts.length < 2 && !filter}
+        />
+      </Label>
+    </Container>
   );
 };
 
